@@ -13,7 +13,6 @@
 #ifndef FDF_H
 # define FDF_H
 # include <stdlib.h>
-# define DEBUG printf("%d - %s - %s\n", __LINE__, __FILE__, __func__);
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
