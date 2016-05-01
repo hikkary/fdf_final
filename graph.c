@@ -19,28 +19,20 @@ void	drawx(t_p *f, int color)
 
 	c = 0;
 	i = 0;
-
-	printf("colonne %d\n",f->len );
-	printf("ligne %d\n",f->i );
 	while (c <= f->i -1)
 	{
 		f->x1 = f->pos[c][i][0];
-		printf("z = %d\n", f->m[c][i][0]);
 		f->y1 = f->posy[c][i][0];
 		if (i + 1 <= f->len)
 			f->x2 = f->pos[c][i + 1][0];
 		if (i + 1 <= f->len )
 			f->y2 = f->posy[c][i + 1][0];
-		printf("%d\n", f->y2 );
 		draw3(f, color, 0);
 		i++;
 		if (i == f->len && c <= f->i)
 		{
-
 			i = 0;
-			printf("avant %d\n",c );
 			c++;
-			printf("apres %d\n",c );
 		}
 	}
 }
@@ -69,9 +61,7 @@ void	drawy(t_p *f, int color)
 		if (i == f->len + 1 && c < f->i - 1)
 		{
 			i = 0;
-		//	printf("avant %d\n",c );
 			c++;
-		//	printf("apres %d\n",c );
 		}
 	}
 }

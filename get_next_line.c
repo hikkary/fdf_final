@@ -95,17 +95,3 @@ int		get_next_line(int const fd, char **line)
 	else
 		return (1);
 }
-
-// int main(int argc, char **argv)
-// {
-// 	char *line;
-// 	int fd;
-
-// 	fd = open(argv[1], O_RDONLY);
-// //	fd = 0;
-// 	while(get_next_line(fd, &line))
-// 	{
-// 		ft_putendl(line);
-// 		free(line);
-// 	}
-//  }

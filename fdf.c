@@ -42,16 +42,36 @@ void	fdf(t_p *f)
 	i = 0;
 	f->mlx = mlx_init();
 	f->win = mlx_new_window(f->mlx, f->h, f->l, "fdf");
-	DEBUG
 	drawx(f, 0X00FF00);
-	DEBUG
 	drawy(f, 0X00FF00);
-	DEBUG
 	hub(f);
-	DEBUG
 	mlx_key_hook(f->win, key_funct, 0);
 	mlx_loop(f->mlx);
 }
+
+t_p *size_m(t_p *f, char **argv)
+{
+	int fd;
+	char *line;
+	int ret;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1 )
+		bad_file();
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		free(line);
+		f->size++;
+	}
+	if (ret < 0)
+		bad_file();
+	if(f->size <= 1) 
+		too_small();
+	close(fd);
+	return(f);
+
+}
+
 
 int		main(int argc, char **argv)
 {
@@ -59,25 +79,20 @@ int		main(int argc, char **argv)
 	static t_p	*f;
 
 	fd = 0;
-	DEBUG
 	if (!argv[1])
 	{
 		ft_putstr_fd("No file\n", 2);
 		return (-1);
 	}
-	DEBUG
 	if (argc != 2)
 		return (-1);
-	DEBUG
-	f = stock(f, fd, argv);
-	DEBUG
-	if (f->i <= 3)
-	{
-		ft_putstr_fd("Map too small", 2);
-		exit(EXIT_FAILURE);
-	}
+	f = malloc(sizeof(t_p));
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1 )
+		bad_file();
+	f = size_m(f, argv);
+	f = stock(f, fd);
 	f = window(f);
-	DEBUG
 	f = convint(f);
 	fdf(f);
 	return (0);
