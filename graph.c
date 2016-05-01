@@ -19,19 +19,28 @@ void	drawx(t_p *f, int color)
 
 	c = 0;
 	i = 0;
-	while (c < f->i)
+
+	printf("colonne %d\n",f->len );
+	printf("ligne %d\n",f->i );
+	while (c <= f->i -1)
 	{
 		f->x1 = f->pos[c][i][0];
+		printf("z = %d\n", f->m[c][i][0]);
 		f->y1 = f->posy[c][i][0];
-		f->x2 = f->pos[c][i + 1][0];
-		f->y2 = f->posy[c][i + 1][0];
-		if (i != f->len - 2)
-			draw3(f, color, 0);
+		if (i + 1 <= f->len)
+			f->x2 = f->pos[c][i + 1][0];
+		if (i + 1 <= f->len )
+			f->y2 = f->posy[c][i + 1][0];
+		printf("%d\n", f->y2 );
+		draw3(f, color, 0);
 		i++;
-		if (i == f->len - 1)
+		if (i == f->len && c <= f->i)
 		{
+
 			i = 0;
+			printf("avant %d\n",c );
 			c++;
+			printf("apres %d\n",c );
 		}
 	}
 }
@@ -43,24 +52,26 @@ void	drawy(t_p *f, int color)
 
 	c = 0;
 	i = 0;
-	while (c < f->i)
+	while (c < f->i - 1)
 	{
 		f->x1 = f->pos[c][i][0];
 		f->y1 = f->posy[c][i][0];
-		if (c != f->i - 1)
+		if (c != f->i)
 			f->y2 = f->posy[c + 1][i][0];
-		else if (c == f->i - 1 && i != f->len - 2)
+		else if (c == f->i - 1 && i != f->len)
 			f->y2 = f->posy[c][i + 1][0];
 		if (c != f->i - 1 && c >= 0)
 			f->x2 = f->pos[c + 1][i][0];
-		else if (c == f->i - 1 && i != f->len - 2)
+		else if (c == f->i - 1 && i != f->len)
 			f->x2 = f->pos[c][i + 1][0];
 		draw3(f, color, 0);
 		i++;
-		if (i == f->len - 1)
+		if (i == f->len + 1 && c < f->i - 1)
 		{
 			i = 0;
+		//	printf("avant %d\n",c );
 			c++;
+		//	printf("apres %d\n",c );
 		}
 	}
 }
