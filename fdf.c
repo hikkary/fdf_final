@@ -12,13 +12,6 @@
 
 #include "fdf.h"
 
-t_p		*window(t_p *f)
-{
-	f->h = 1980;
-	f->l = 1280;
-	return (f);
-}
-
 void	hub(t_p *f)
 {
 	mlx_string_put(f->mlx, f->win, 35, 35, 0x0000FF, " Exit");
@@ -49,29 +42,29 @@ void	fdf(t_p *f)
 	mlx_loop(f->mlx);
 }
 
-t_p *size_m(t_p *f, char **argv)
+t_p		*size_m(t_p *f, char **argv)
 {
-	int fd;
-	char *line;
-	int ret;
+	int		fd;
+	char	*line;
+	int		ret;
 
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1 )
+	if (fd == -1)
 		bad_file();
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
+		if (line[0] != ' ' && ft_isdigit(line[0]) == 0)
+			bad_file();
 		free(line);
 		f->size++;
 	}
 	if (ret < 0)
 		bad_file();
-	if(f->size <= 1) 
+	if (f->size <= 1)
 		too_small();
 	close(fd);
-	return(f);
-
+	return (f);
 }
-
 
 int		main(int argc, char **argv)
 {
@@ -88,7 +81,7 @@ int		main(int argc, char **argv)
 		return (-1);
 	f = malloc(sizeof(t_p));
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1 )
+	if (fd == -1)
 		bad_file();
 	f = size_m(f, argv);
 	f = stock(f, fd);

@@ -11,10 +11,29 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include "fdf.h"
 
-int	count_words(const char *str, char c)
+t_p		*zoom(t_p *f)
+{
+	f->zoom = 1980 / (f->i + f->len);
+	f->zoomy = 1280 / (f->i + f->len);
+	return (f);
+}
+
+t_p		*window(t_p *f)
+{
+	f->h = 1980;
+	f->l = 1280;
+	return (f);
+}
+
+void	too_small(void)
+{
+	ft_putstr_fd("Map too small\n", 2);
+	exit(EXIT_FAILURE);
+}
+
+int		count_words(const char *str, char c)
 {
 	int i;
 	int nbr;
@@ -34,7 +53,7 @@ int	count_words(const char *str, char c)
 	return (nbr);
 }
 
-int	***create_tab_int(int l, int c, int ***tab)
+int		***create_tab_int(int l, int c, int ***tab)
 {
 	int i;
 

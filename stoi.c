@@ -25,29 +25,27 @@ void	not_number(void)
 	exit(EXIT_FAILURE);
 }
 
-void isdig(char *str)
+void	isdig(char *str)
 {
 	int i;
 
 	i = 0;
-	if(str[0] == '-')
+	if (str[0] == '-')
 		i++;
-	while(str[i] && str[i] != ',')
+	while (str[i] && str[i] != ',')
 	{
-		if(ft_isdigit(str[i]) == 0)
+		if (ft_isdigit(str[i]) == 0)
 			not_number();
 		i++;
 	}
 }
-
 
 t_p		*ft_posxy(t_p *f, char ***t, int l, int h)
 {
 	int i;
 
 	i = 0;
-	f->zoom = 1980 / (f->i + f->len);
-	f->zoomy =  1280 / (f->i + f->len);
+	f = zoom(f);
 	while (t[h])
 	{
 		while (t[h][l])

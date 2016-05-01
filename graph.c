@@ -19,13 +19,13 @@ void	drawx(t_p *f, int color)
 
 	c = 0;
 	i = 0;
-	while (c <= f->i -1)
+	while (c <= f->i - 1)
 	{
 		f->x1 = f->pos[c][i][0];
 		f->y1 = f->posy[c][i][0];
 		if (i + 1 <= f->len)
 			f->x2 = f->pos[c][i + 1][0];
-		if (i + 1 <= f->len )
+		if (i + 1 <= f->len)
 			f->y2 = f->posy[c][i + 1][0];
 		draw3(f, color, 0);
 		i++;

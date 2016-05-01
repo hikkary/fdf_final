@@ -12,44 +12,37 @@
 
 #include "fdf.h"
 
-void bad_file()
+void	bad_file(void)
 {
 	ft_putstr_fd("Unvalid file\n", 2);
-		exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
-void bad_map()
+void	bad_map(void)
 {
 	ft_putstr_fd("Unvalid/Not square map\n", 2);
-		exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
-void too_small()
-{
-	ft_putstr_fd("Map too small\n", 2);
-		exit(EXIT_FAILURE);
-}
-
-void ft_ismap(char **str)
+void	ft_ismap(char **str)
 {
 	int i;
 	int len;
 	int ver;
+
 	i = 1;
 	ver = 0;
 	len = count_words(str[0], ' ');
-	while(str[i])
+	while (str[i])
 	{
 		ver = count_words(str[i], ' ');
-		if(ver != len)
+		if (ver != len)
 			bad_map();
 		i++;
 	}
 }
 
-
-
-t_p	*stock(t_p *f, int fd)
+t_p		*stock(t_p *f, int fd)
 {
 	char	*line;
 	int		ret;
@@ -59,8 +52,6 @@ t_p	*stock(t_p *f, int fd)
 		exit(EXIT_FAILURE);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (line[0] != ' ' && ft_isdigit(line[0] == 0))
-		  	exit(EXIT_FAILURE);
 		f->map[f->i] = ft_strnew(1);
 		f->map[f->i] = ft_strjoin(f->map[f->i], line);
 		free(line);
@@ -68,7 +59,7 @@ t_p	*stock(t_p *f, int fd)
 	}
 	if (ret < 0)
 		bad_file();
-	if(f->i <= 1 || (f->len = count_words(f->map[0], ' ')) <= 1) 
+	if (f->i <= 1 || (f->len = count_words(f->map[0], ' ')) <= 1)
 		too_small();
 	ft_ismap(f->map);
 	f->map[f->i] = NULL;
@@ -76,7 +67,7 @@ t_p	*stock(t_p *f, int fd)
 	return (f);
 }
 
-t_p	*convint(t_p *f)
+t_p		*convint(t_p *f)
 {
 	int		i;
 

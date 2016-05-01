@@ -48,8 +48,8 @@ typedef struct	s_param
 	int		len;
 	int		lline;
 	int		zoom;
-	int 	zoomy;
-	int 	size;
+	int		zoomy;
+	int		size;
 }				t_p;
 
 int				***create_tab_int(int l, int c, int ***tab);
@@ -64,7 +64,9 @@ void			drawy(t_p *f, int color);
 t_p				*ft_posxy(t_p *f, char ***t, int l, int h);
 void			ft_big();
 void			bad_file();
-void 			bad_map();
-void 			too_small();
+void			bad_map();
+void			too_small();
 void			ft_ismap(char **str);
+t_p				*window(t_p *f);
+t_p				*zoom(t_p *f);
 #endif
